@@ -1,7 +1,16 @@
 
 local map = vim.api.nvim_set_keymap
 local opt = {noremap = true, silent = true}
+<<<<<<< HEAD
 
+=======
+map("n","<A-q>","<ESC>",opt)
+map("v","<A-q>","<ESC>",opt)
+map("n","O","o<ESC>k",opt)
+--
+map("n","QQ",":q!<CR>:q!<CR>",opt)
+map("n","WW","ZZ",opt)
+>>>>>>> [init]add new setting
 --设定ijkl为上下左右
 map("n",'i','k',opt)
 map("n",'j','h',opt)
@@ -30,8 +39,13 @@ map("n", "sk", ":resize -10<CR>",opt)
 
 --窗口跳转相关
 map("n", "<A-j>", "<C-w>h", opt)
+<<<<<<< HEAD
 map("n", "<A-k>", "<C-w>j", opt)
 map("n", "<A-i>", "<C-w>k", opt)
+=======
+--map("n", "<A-k>", "<C-w>j", opt)
+--map("n", "<A-i>", "<C-w>k", opt)
+>>>>>>> [init]add new setting
 map("n", "<A-l>", "<C-w>l", opt)
 
 --nvim-tree
@@ -41,6 +55,18 @@ map('n',"<A-o>",':NvimTreeToggle<CR>',opt)
 map("n", "<C-j>", ":BufferLineCyclePrev<CR>", opt)
 map("n", "<C-l>", ":BufferLineCycleNext<CR>", opt)
 
+<<<<<<< HEAD
+=======
+
+--telescope
+map("n", "ff", ":Telescope find_files<CR>", opt)
+map("n", "fg", ":Telescope live_grep<CR>", opt)
+map("n", "fb", ":Telescope buffers<CR>", opt)
+map("n", "fh", ":Telescope help_tags<CR>", opt)
+map("n", "fB", ":Telescope file_browser<CR>", opt)
+map("n", "fF", ":Telescope current_buffer_fuzzy_find<CR>", opt)
+
+>>>>>>> [init]add new setting
 local pluginKeys = {}
 
 -- lsp 回调函数快捷键设置
@@ -69,6 +95,7 @@ pluginKeys.maplsp = function(mapbuf)
   -- mapbuf('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opt)
 end
 
+<<<<<<< HEAD
 -- nvim-cmp 自动补全
 pluginKeys.cmp = function(cmp)
   return {
@@ -76,6 +103,37 @@ pluginKeys.cmp = function(cmp)
     ['<C-k>'] = cmp.mapping.select_prev_item(),
     -- 下一个
     ['<C-j>'] = cmp.mapping.select_next_item(),
+=======
+
+-- nvim-cmp 自动补全
+pluginKeys.cmp = function(cmp)
+  return {
+	['<Tab>'] = cmp.mapping(function(fallback)
+								if cmp.visible() then
+									if cmp.get_active_entry() then
+										cmp.select_next_item()
+									else
+										cmp.select_next_item()
+										cmp.close()
+									end
+								return
+								end
+								fallback()
+							end
+	, { 'i', 'c' }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+								if cmp.visible() then
+									cmp.select_prev_item()
+									return
+								end
+								fallback()
+							end
+	, { 'i', 'c' }),
+	-- 上一个
+    ['<A-i>'] = cmp.mapping.select_prev_item(),
+    -- 下一个
+    ['<A-k>'] = cmp.mapping.select_next_item(),
+>>>>>>> [init]add new setting
     -- 出现补全
     ['<A-.>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     -- 取消
@@ -98,4 +156,7 @@ end
 
 return pluginKeys
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> [init]add new setting
